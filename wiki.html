@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Wikipedia Popups</title>
+
+  <style>
+    /* Popup styling */
+    .popup {
+      position: absolute;
+      background-color: #ffffcc;
+      border: 1px solid #333;
+      padding: 10px;
+      width: 250px;
+      display: none; /* hidden by default */
+      z-index: 999;
+    }
+
+    .wiki-link {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Wikipedia Preview Popups</h1>
+
+  <p>
+    Here are some topics.  
+    Hover your mouse to see the popup preview:
+  </p>
+
+  <!-- Links with data-popup attributes -->
+  <ul>
+    <li>
+      <span class="wiki-link"
+            data-title="JavaScript"
+            data-summary="JavaScript is a programming language commonly used for interactive web pages.">
+        JavaScript
+      </span>
+    </li>
+
+    <li>
+      <span class="wiki-link"
+            data-title="HTML"
+            data-summary="HTML is the markup language used to structure content on the web.">
+        HTML
+      </span>
+    </li>
+
+    <li>
+      <span class="wiki-link"
+            data-title="CSS"
+            data-summary="CSS is used to style and layout web pages, including colors, fonts, and spacing.">
+        CSS
+      </span>
+    </li>
+  </ul>
+
+  <!-- Popup element -->
+  <div id="popup" class="popup"></div>
+
+  <script>
+    // Get the popup element
+    let popup = document.querySelector("#popup")
+
+    // Get all elements with class 'wiki-link'
+    let links = document.querySelectorAll(".wiki-link")
+
+    // Loop through each link and add events
+    links.forEach(function(link) {
+
+      // When mouse enters → show popup
+      link.addEventListener("mouseover", function(e) {
+
+        // Read data from custom attributes
+        let title = link.dataset.title
+        let summary = link.dataset.summary
+
+        // Fill popup HTML
+        popup.innerHTML = `<strong>${title}</strong><br>${summary}`
+
+        // Position popup near cursor
+        popup.style.left = e.pageX + 10 + "px"
+        popup.style.top = e.pageY + 10 + "px"
+
+        // Show it
+        popup.style.display = "block"
+      })
+
+      // When moving mouse → track popup position
+      link.addEventListener("mousemove", function(e) {
+        popup.style.left = e.pageX + 10 + "px"
+        popup.style.top = e.pageY + 10 + "px"
+      })
+
+      // When mouse leaves → hide popup
+      link.addEventListener("mouseout", function() {
+        popup.style.display = "none"
+      })
+    })
+  </script>
+
+</body>
+</html>

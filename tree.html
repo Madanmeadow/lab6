@@ -1,0 +1,55 @@
+<script>
+let homeownerNameInput = document.querySelector('#homeowner-name')
+let homeownerHouseNumberInput = document.querySelector('#homeowner-house-number')
+let homeownerStreetNameInput = document.querySelector('#homeowner-street-name')
+let cityInput = document.querySelector('#city')
+let zipcodeInput = document.querySelector('#zipcode')
+let treeTypeSelect = document.querySelector('#tree-type')
+let submitButton = document.querySelector('#submit-order')
+let orderSummaryParagraph = document.querySelector('#order-summary')
+
+submitButton.addEventListener('click', function () {
+
+    let name = homeownerNameInput.value
+    let houseNumber = homeownerHouseNumberInput.value
+    let streetName = homeownerStreetNameInput.value
+    let city = cityInput.value
+    let zipcode = zipcodeInput.value
+    let treeType = treeTypeSelect.value
+
+    homeownerNameInput.classList.remove("error")
+    homeownerHouseNumberInput.classList.remove("error")
+    homeownerStreetNameInput.classList.remove("error")
+    cityInput.classList.remove("error")
+    zipcodeInput.classList.remove("error")
+    treeTypeSelect.classList.remove("error")
+
+    let errors = []
+
+    if (!name) { errors.push("Homeowner name required."); homeownerNameInput.classList.add("error") }
+    if (!houseNumber) { errors.push("House number required."); homeownerHouseNumberInput.classList.add("error") }
+    if (!streetName) { errors.push("Street name required."); homeownerStreetNameInput.classList.add("error") }
+    if (!city) { errors.push("City required."); cityInput.classList.add("error") }
+    if (!zipcode) { errors.push("Zipcode required."); zipcodeInput.classList.add("error") }
+    if (!treeType) { errors.push("Select a tree."); treeTypeSelect.classList.add("error") }
+
+    let zipNumber = Number(zipcode)
+    if (isNaN(zipNumber) || zipNumber < 55001 || zipNumber > 56763) {
+        errors.push("Zipcode must be MN 55001–56763.")
+        zipcodeInput.classList.add("error")
+    }
+
+    if (errors.length > 0) {
+        alert(errors.join("\n"))
+        return
+    }
+
+    orderSummaryParagraph.innerHTML = `
+        Order received! <br>
+        <strong>${name}</strong><br>
+        ${houseNumber} ${streetName}<br>
+        ${city}, Minnesota ${zipcode}<br>
+        Tree: <strong>${treeType}</strong>
+    `
+})
+</script>
