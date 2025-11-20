@@ -1,3 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Tree Order Form</title>
+
+  <style>
+      input, select {
+          width: 100%;
+          padding: 5px;
+          margin: 5px 5px 5px 0px;
+          box-sizing: border-box;
+      }
+
+      input.error, select.error {
+        border: 2px red solid;
+      }
+  </style>
+
+</head>
+<body>
+
+    <h1>Minnesota Tree Order Form</h1>
+
+    <p>Enter information to order your tree. All fields are required.</p>
+
+    <h2>Order Information</h2>
+
+    <label for="homeowner-name">Homeowner Name</label>
+    <input id="homeowner-name">
+
+    <label for="homeowner-house-number">House Number</label>
+    <input id="homeowner-house-number">
+
+    <label for="homeowner-street-name">Street Name</label>
+    <input id="homeowner-street-name">
+
+    <label for="city">City</label>
+    <input id="city">
+
+    <label for="state">State</label>
+    <input id="state" value="Minnesota" disabled>
+
+    <label for="zipcode">Zip Code</label>
+    <input id="zipcode">
+
+    <label for="tree-type">Tree Type</label>
+    <select id="tree-type">
+        <option disabled selected value="">Select a tree</option>
+        <option>Cedar</option>
+        <option>Maple</option>
+        <option>Oak</option>
+    </select>
+
+    <button id="submit-order">Submit Order</button>
+
+    <h2>Order Summary</h2>
+    <p id="order-summary"></p>
+
 <script>
 let homeownerNameInput = document.querySelector('#homeowner-name')
 let homeownerHouseNumberInput = document.querySelector('#homeowner-house-number')
@@ -53,3 +111,6 @@ submitButton.addEventListener('click', function () {
     `
 })
 </script>
+
+</body>
+</html>
