@@ -5,14 +5,13 @@
   <title>Wikipedia Popups</title>
 
   <style>
-    /* Popup styling */
     .popup {
       position: absolute;
       background-color: #ffffcc;
       border: 1px solid #333;
       padding: 10px;
       width: 250px;
-      display: none; /* hidden by default */
+      display: none; /* hide initially */
       z-index: 999;
     }
 
@@ -28,17 +27,13 @@
 
   <h1>Wikipedia Preview Popups</h1>
 
-  <p>
-    Here are some topics.  
-    Hover your mouse to see the popup preview:
-  </p>
+  <p>Here are some topics. Hover your mouse to see the popup preview:</p>
 
-  <!-- Links with data-popup attributes -->
   <ul>
     <li>
       <span class="wiki-link"
             data-title="JavaScript"
-            data-summary="JavaScript is a programming language commonly used for interactive web pages.">
+            data-summary="JavaScript is a programming language commonly used to create interactive web pages.">
         JavaScript
       </span>
     </li>
@@ -46,7 +41,7 @@
     <li>
       <span class="wiki-link"
             data-title="HTML"
-            data-summary="HTML is the markup language used to structure content on the web.">
+            data-summary="HTML is the markup language used to structure content on web pages.">
         HTML
       </span>
     </li>
@@ -54,54 +49,53 @@
     <li>
       <span class="wiki-link"
             data-title="CSS"
-            data-summary="CSS is used to style and layout web pages, including colors, fonts, and spacing.">
+            data-summary="CSS is used for styling and laying out web pages with colors, fonts, and positioning.">
         CSS
       </span>
     </li>
   </ul>
 
-  <!-- Popup element -->
+  <!-- Popup -->
   <div id="popup" class="popup"></div>
 
   <script>
-    // Get the popup element
-    let popup = document.querySelector("#popup")
+    // Popup div
+    let popup = document.querySelector("#popup");
 
-    // Get all elements with class 'wiki-link'
-    let links = document.querySelectorAll(".wiki-link")
+    // All links
+    let links = document.querySelectorAll(".wiki-link");
 
-    // Loop through each link and add events
+    // For each preview link
     links.forEach(function(link) {
 
-      // When mouse enters → show popup
+      // Mouse enters → show popup
       link.addEventListener("mouseover", function(e) {
 
-        // Read data from custom attributes
-        let title = link.dataset.title
-        let summary = link.dataset.summary
+        // Get text from data attributes
+        let title = link.dataset.title;
+        let summary = link.dataset.summary;
 
         // Fill popup HTML
-        popup.innerHTML = `<strong>${title}</strong><br>${summary}`
+        popup.innerHTML = `<strong>${title}</strong><br>${summary}`;
 
-        // Position popup near cursor
-        popup.style.left = e.pageX + 10 + "px"
-        popup.style.top = e.pageY + 10 + "px"
+        // Position and show
+        popup.style.left = (e.pageX + 10) + "px";
+        popup.style.top = (e.pageY + 10) + "px";
+        popup.style.display = "block";
+      });
 
-        // Show it
-        popup.style.display = "block"
-      })
-
-      // When moving mouse → track popup position
+      // Move mouse → move popup
       link.addEventListener("mousemove", function(e) {
-        popup.style.left = e.pageX + 10 + "px"
-        popup.style.top = e.pageY + 10 + "px"
-      })
+        popup.style.left = (e.pageX + 10) + "px";
+        popup.style.top = (e.pageY + 10) + "px";
+      });
 
-      // When mouse leaves → hide popup
+      // Mouse leaves → hide popup
       link.addEventListener("mouseout", function() {
-        popup.style.display = "none"
-      })
-    })
+        popup.style.display = "none";
+      });
+
+    });
   </script>
 
 </body>
