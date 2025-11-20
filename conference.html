@@ -1,48 +1,134 @@
-<script>
-let nameInput = document.querySelector('#name')
-let passwordInput = document.querySelector('#password')
-let emailInput = document.querySelector('#email')
-let tshirtInput = document.querySelector('#tshirt')
-let dobInput = document.querySelector('#dob')
-let morning = document.querySelector('#morning')
-let afternoon = document.querySelector('#afternoon')
-let updates = document.querySelector('#updates')
-let special = document.querySelector('#special')
-let registerButton = document.querySelector('#register-button')
-let message = document.querySelector('#message')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conference Registration</title>
 
-registerButton.addEventListener('click', function() {
-    message.innerHTML = ""
-    let errors = []
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            width: 600px;
+            margin: 40px auto;
+        }
 
-    if (!nameInput.value) errors.push("Name required.")
-    if (!passwordInput.value) errors.push("Password required.")
-    if (!emailInput.value) errors.push("Email required.")
-    if (!tshirtInput.value) errors.push("T-shirt size required.")
-    if (!dobInput.value) errors.push("Date of birth required.")
-    if (!morning.checked && !afternoon.checked) errors.push("Select morning or afternoon session.")
+        label {
+            display: block;
+            margin-top: 15px;
+        }
 
-    if (errors.length > 0) {
-        message.innerHTML = errors.join("<br>")
-        return
-    }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
 
-    let sessions = []
-    if (morning.checked) sessions.push("morning")
-    if (afternoon.checked) sessions.push("afternoon")
+        #register-button {
+            margin-top: 20px;
+            padding: 10px;
+            width: 200px;
+        }
 
-    let registration = {
-        name: nameInput.value,
-        password: passwordInput.value,
-        email: emailInput.value,
-        tShirtSize: tshirtInput.value,
-        dateOfBirth: dobInput.value,
-        receiveEmailUpdates: updates.checked,
-        sessionsAttended: sessions,
-        specialRequests: special.value
-    }
+        #message {
+            margin-top: 20px;
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
 
-    console.log(registration)
-    message.innerHTML = "Registration successful! Check console."
-})
-</script>
+<body>
+
+    <h1>Conference Registration</h1>
+
+    <label>Name</label>
+    <input type="text" id="name">
+
+    <label>Password</label>
+    <input type="password" id="password">
+
+    <label>Email</label>
+    <input type="email" id="email">
+
+    <label>T-Shirt Size</label>
+    <select id="tshirt">
+        <option value="">Select size</option>
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+        <option>XL</option>
+    </select>
+
+    <label>Date of Birth</label>
+    <input type="date" id="dob">
+
+    <label>Sessions You Will Attend</label>
+    <input type="checkbox" id="morning"> Morning Session<br>
+    <input type="checkbox" id="afternoon"> Afternoon Session
+
+    <label>
+        <input type="checkbox" id="updates">
+        Receive Email Updates?
+    </label>
+
+    <label>Special Requests (Optional)</label>
+    <textarea id="special"></textarea>
+
+    <button id="register-button">Register</button>
+
+    <p id="message"></p>
+
+    <!-- 🔥 Fully working JavaScript -->
+    <script>
+        let nameInput = document.querySelector('#name')
+        let passwordInput = document.querySelector('#password')
+        let emailInput = document.querySelector('#email')
+        let tshirtInput = document.querySelector('#tshirt')
+        let dobInput = document.querySelector('#dob')
+        let morning = document.querySelector('#morning')
+        let afternoon = document.querySelector('#afternoon')
+        let updates = document.querySelector('#updates')
+        let special = document.querySelector('#special')
+        let registerButton = document.querySelector('#register-button')
+        let message = document.querySelector('#message')
+
+        registerButton.addEventListener('click', function() {
+            message.innerHTML = ""
+            let errors = []
+
+            if (!nameInput.value) errors.push("Name required.")
+            if (!passwordInput.value) errors.push("Password required.")
+            if (!emailInput.value) errors.push("Email required.")
+            if (!tshirtInput.value) errors.push("T-shirt size required.")
+            if (!dobInput.value) errors.push("Date of birth required.")
+            if (!morning.checked && !afternoon.checked) errors.push("Select morning or afternoon session.")
+
+            if (errors.length > 0) {
+                message.innerHTML = errors.join("<br>")
+                return
+            }
+
+            let sessions = []
+            if (morning.checked) sessions.push("morning")
+            if (afternoon.checked) sessions.push("afternoon")
+
+            let registration = {
+                name: nameInput.value,
+                password: passwordInput.value,
+                email: emailInput.value,
+                tShirtSize: tshirtInput.value,
+                dateOfBirth: dobInput.value,
+                receiveEmailUpdates: updates.checked,
+                sessionsAttended: sessions,
+                specialRequests: special.value
+            }
+
+            console.log(registration)
+            message.style.color = "green"
+            message.innerHTML = "Registration successful! Check console."
+        })
+    </script>
+
+</body>
+</html>
+
